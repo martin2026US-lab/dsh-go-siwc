@@ -13,8 +13,8 @@ async function walk(directory,depth=0) {
     const filename=path.join(directory,entry.name)
     if(entry.isSymbolicLink())throw new Error('Release source must not contain symlinks')
     if(entry.isDirectory()) {if(depth>0 || allowed.has(entry.name))await walk(filename,depth+1);continue}
-    if(!/\.(?:mjs|json|ya?ml|md)$/.test(entry.name) && !['LICENSE','.gitignore'].includes(entry.name))continue
     if(['registrations.json','credentials.enc.json','storage-key.bin'].includes(entry.name))throw new Error('Credential file in release tree')
+    if(!/\.(?:mjs|json|ya?ml|md)$/.test(entry.name) && !['LICENSE','.gitignore'].includes(entry.name))continue
     const content=await fs.readFile(filename,'utf8')
     if(patterns.some(p=>p.test(content)))throw new Error('Possible secret in '+path.relative(root,filename))
     if(/[A-Z]:\\Users\\/i.test(content))throw new Error('Personal device path in source')

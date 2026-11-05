@@ -28,9 +28,13 @@ Official DSH Go 1.0.10; DSH 0.2.1-rc.4, pi-ai 1.4.0, Node 24.22.1. Independent p
 
 - Installation hash verified before invoking the official plugin CLI.
 - Remembered grant restored after upgrade and two engine restarts, without browser reauthorization. Versioned consent also survived the UI upgrade/restart.
+- The app was sent to the background, fully stopped, and reopened. The engine started normally and the account panel still showed the saved login and enabled remembering. No OAuth login was repeated.
 - Authenticated account model discovery succeeded and returned eight visible models. This was a catalog GET, not a real inference request.
 - Native account view inspected on the phone: email on a full-width line, compact storage status and separate More settings. The confirmation label respects the host's 12-character cap.
-- Real automatic refresh: pending the normal expiry window. Public release remains gated until device rotation and restoration of the replacement are confirmed.
+- GitHub CI passed on the private staging commit; its host/JOSE skips remain distinct from the full local run.
+- Real automatic refresh succeeded after natural access-token expiry: a normal catalog request renewed access without browser sign-in and returned eight visible models. A phone-local check confirmed replacement refresh credentials had changed from the private baseline and were saved to the encrypted vault; the new access lifetime was approximately one hour. No early refresh was forced and no credential was exported.
+- A further engine restart restored that replacement grant from the encrypted vault; it remained signed in with the new lifetime and the existing privacy consent.
+- The three persistent login files had no group/other permissions on the Android-hosted runtime. This is filesystem isolation, not Android Keystore protection.
 
 Device verification keeps credentials on the phone and reports only booleans, relative expiry, plugin version and notice version. No account email, OAuth client ID, token, private directory or login screenshot is included in release artifacts.
 
