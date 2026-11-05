@@ -1,0 +1,26 @@
+name: Offline plugin checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/checkout@v4
+        with:
+          repository: ccch1mneyyy/dsh-Go
+          ref: 4cd4517dd7864604ea8d8c306a13d9f068113429
+          path: .ci/dsh-go
+          persist-credentials: false
+      - run: node scripts/verify-release.mjs
+      - run: node --test test/*.test.mjs
+        env:
+          DSH_PLUGIN_KIT: ${{ github.workspace }}/.ci/dsh-go/sdk/plugin-kit
+      - run: node .ci/dsh-go/sdk/plugin-kit/bin/check.mjs . --load --json
+      # This job intentionally has no OpenAI credentials or inference requests.
+      # Host-dependent adapter/JOSE integration checks need a separately prepared,
+      # exact-version DSH engine and SDK. See VERIFICATION.md; skips are not passes.

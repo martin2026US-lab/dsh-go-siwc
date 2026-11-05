@@ -1,0 +1,87 @@
+{
+  "name": "local-openai-siwc",
+  "version": "0.2.1",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.mjs",
+  "description": "Independent Sign in with ChatGPT provider for DSH Go, with account-scoped models and Responses streaming.",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin2026US-lab/dsh-go-siwc.git"
+  },
+  "homepage": "https://github.com/martin2026US-lab/dsh-go-siwc#readme",
+  "bugs": {
+    "url": "https://github.com/martin2026US-lab/dsh-go-siwc/issues"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "dsh-bundle",
+    "dsh-go",
+    "siwc",
+    "oauth"
+  ],
+  "files": [
+    "lib/*.mjs",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "SECURITY.md",
+    "PRIVACY.md",
+    "CHANGELOG.md",
+    "MARKETPLACE.md"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22.19",
+    "dsh": ">=0.2.1-rc.4 <0.3.0-0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dshGo": {
+    "v": 1,
+    "minApp": "1.0.10",
+    "title": {
+      "zh": "ChatGPT 登录",
+      "en": "ChatGPT sign-in"
+    },
+    "icon": "account",
+    "contributes": {
+      "composer.actions": [
+        {
+          "id": "open-chatgpt",
+          "label": {
+            "zh": "ChatGPT",
+            "en": "ChatGPT"
+          },
+          "icon": "account",
+          "effect": {
+            "type": "open",
+            "page": "panel:chatgpt-account"
+          }
+        }
+      ],
+      "panels": [
+        {
+          "id": "chatgpt-account",
+          "title": {
+            "zh": "ChatGPT 登录",
+            "en": "ChatGPT sign-in"
+          },
+          "icon": "account",
+          "placement": [
+            "features",
+            "session.tab",
+            "chat.panel"
+          ]
+        }
+      ]
+    }
+  }
+}

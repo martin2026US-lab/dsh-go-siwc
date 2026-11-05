@@ -1,0 +1,9 @@
+{
+  "name": "local-openai-siwc",
+  "version": "0.2.1",
+  "title": { "zh": "ChatGPT 登录", "en": "ChatGPT sign-in" },
+  "summary": { "zh": "独立 SIWC 登录、本人套餐模型与可选持久登录", "en": "Independent SIWC sign-in, account models and optional remembered login" },
+  "category": "tools",
+  "screenshots": [],
+  "homepage": "https://github.com/martin2026US-lab/dsh-go-siwc"
+}
